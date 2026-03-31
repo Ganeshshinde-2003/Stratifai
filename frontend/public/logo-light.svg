@@ -1,0 +1,9 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Abstract layered mountain/triangle design representing growth and stratification -->
+  <path d="M20 8L32 28H8L20 8Z" fill="#2C2C2C" opacity="0.25"/>
+  <path d="M20 14L28 28H12L20 14Z" fill="#2C2C2C" opacity="0.5"/>
+  <path d="M20 20L24 28H16L20 20Z" fill="#2C2C2C"/>
+
+  <!-- AI accent dot -->
+  <circle cx="32" cy="12" r="2.5" fill="#2C2C2C"/>
+</svg>

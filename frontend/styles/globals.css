@@ -1,0 +1,200 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  /* Light mode - Soft Neutral Theme */
+  /* Backgrounds - Off-white/Light gray shades */
+  --bg-primary: #FAFAFA;
+  --bg-secondary: #F5F5F5;
+  --bg-tertiary: #EEEEEE;
+  --bg-elevated: #FFFFFF;
+  --card-bg: #F5F5F5;
+
+  /* Borders - Subtle gray tones */
+  --border-light: #E5E5E5;
+  --border-color: #DDDDDD;
+  --border-strong: #CCCCCC;
+  --border-hover: #BBBBBB;
+
+  /* Text - Charcoal/Gray */
+  --text-primary: #2C2C2C;
+  --text-secondary: #4A4A4A;
+  --text-muted: #6B6B6B;
+  --text-tertiary: #6B6B6B;
+  --text-inverse: #FAFAFA;
+
+  /* Accents - Charcoal */
+  --accent: #2C2C2C;
+  --accent-hover: #1A1A1A;
+  --accent-light: #4A4A4A;
+
+  /* Status colors */
+  --success: #6B8E6B;
+  --error: #C17A7A;
+  --warning: #D4A574;
+  --info: #7A9BB8;
+
+  /* Shadows - Minimal */
+  --shadow: rgba(0, 0, 0, 0.04);
+  --shadow-hover: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme='dark'] {
+  /* Dark mode - Soft Neutral Dark Theme */
+  /* Backgrounds - Charcoal/Dark gray */
+  --bg-primary: #2C2C2C;
+  --bg-secondary: #363636;
+  --bg-tertiary: #404040;
+  --bg-elevated: #4A4A4A;
+  --card-bg: #363636;
+
+  /* Borders - Dark gray tones */
+  --border-light: #404040;
+  --border-color: #4A4A4A;
+  --border-strong: #555555;
+  --border-hover: #666666;
+
+  /* Text - Off-white/Light gray */
+  --text-primary: #FAFAFA;
+  --text-secondary: #E5E5E5;
+  --text-muted: #CCCCCC;
+  --text-tertiary: #CCCCCC;
+  --text-inverse: #2C2C2C;
+
+  /* Accents - Light gray */
+  --accent: #E5E5E5;
+  --accent-hover: #FAFAFA;
+  --accent-light: #CCCCCC;
+
+  /* Status colors - Muted for dark mode */
+  --success: #7A9B7A;
+  --error: #D68F8F;
+  --warning: #E0B588;
+  --info: #8FADCC;
+
+  /* Shadows - Minimal */
+  --shadow: rgba(0, 0, 0, 0.3);
+  --shadow-hover: rgba(0, 0, 0, 0.4);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+body {
+  background: var(--bg-primary);
+  min-height: 100vh;
+  color: var(--text-primary);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Better text rendering */
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Better focus states for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Print Styles */
+@media print {
+  /* Hide navigation and interactive elements */
+  nav,
+  button,
+  .theme-toggle,
+  .keyboard-help {
+    display: none !important;
+  }
+
+  /* Optimize for print */
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  /* Expand content for print */
+  * {
+    box-shadow: none !important;
+  }
+
+  /* Page breaks */
+  h1, h2, h3 {
+    page-break-after: avoid;
+  }
+
+  /* Ensure links are visible */
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+}
+
+/* Mobile Responsive Improvements */
+@media (max-width: 768px) {
+  html,
+  body {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  /* Better tap targets on mobile */
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    min-height: 44px;
+  }
+}
+
+/* Touch device improvements */
+@media (hover: none) and (pointer: coarse) {
+  /* Larger touch targets */
+  button {
+    min-height: 48px;
+    padding: 0.75rem 1rem;
+  }
+
+  /* Remove hover states on touch devices */
+  *:hover {
+    transform: none !important;
+  }
+}

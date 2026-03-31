@@ -1,0 +1,245 @@
+# Example Product URLs for Testing
+
+## ✅ Best URLs for Testing (Highly Recommended)
+
+These URLs have great content and scrape very well:
+
+1. Stripe (Payment Processing)
+   https://stripe.com
+
+2. Notion (Productivity)
+   https://notion.so
+
+3. Figma (Design Tool)
+   https://figma.com
+
+4. Slack (Team Communication)
+   https://slack.com
+
+5. Shopify (E-commerce Platform)
+   https://shopify.com
+
+---
+
+## 🚀 SaaS & Business Tools
+
+6. Airtable (Database/Spreadsheet)
+   https://airtable.com
+
+7. Zapier (Automation)
+   https://zapier.com
+
+8. Mailchimp (Email Marketing)
+   https://mailchimp.com
+
+9. HubSpot (CRM)
+   https://hubspot.com
+
+10. Canva (Design Platform)
+    https://canva.com
+
+11. Asana (Project Management)
+    https://asana.com
+
+12. Calendly (Scheduling)
+    https://calendly.com
+
+---
+
+## 💻 Developer Tools
+
+13. GitHub (Code Hosting)
+    https://github.com
+
+14. Vercel (Deployment Platform)
+    https://vercel.com
+
+15. Supabase (Backend as a Service)
+    https://supabase.com
+
+16. Linear (Issue Tracking)
+    https://linear.app
+
+17. Railway (Cloud Platform)
+    https://railway.app
+
+---
+
+## 📊 Analytics & Marketing
+
+18. Google Analytics
+    https://marketingplatform.google.com/about/analytics/
+
+19. Mixpanel (Product Analytics)
+    https://mixpanel.com
+
+20. Segment (Customer Data Platform)
+    https://segment.com
+
+---
+
+## 💰 Finance & Payments
+
+21. PayPal
+    https://paypal.com
+
+22. Square (Point of Sale)
+    https://squareup.com
+
+23. Wise (Money Transfer)
+    https://wise.com
+
+---
+
+## 🎨 Design & Creative
+
+24. Adobe Creative Cloud
+    https://adobe.com/creativecloud.html
+
+25. Dribbble (Design Community)
+    https://dribbble.com
+
+26. Behance (Portfolio Platform)
+    https://behance.net
+
+---
+
+## 🛒 E-commerce & Retail
+
+27. Amazon Seller Central
+    https://sell.amazon.com
+
+28. Etsy (Handmade Marketplace)
+    https://etsy.com
+
+29. WooCommerce (WordPress Plugin)
+    https://woocommerce.com
+
+---
+
+## 📱 Communication & Social
+
+30. Discord (Community Platform)
+    https://discord.com
+
+31. Zoom (Video Conferencing)
+    https://zoom.us
+
+32. Loom (Video Messaging)
+    https://loom.com
+
+---
+
+## 🎓 Education & Learning
+
+33. Duolingo (Language Learning)
+    https://duolingo.com
+
+34. Coursera (Online Courses)
+    https://coursera.org
+
+35. Khan Academy (Free Education)
+    https://khanacademy.org
+
+---
+
+## 🏥 Health & Wellness
+
+36. Calm (Meditation App)
+    https://calm.com
+
+37. Headspace (Mindfulness)
+    https://headspace.com
+
+38. MyFitnessPal (Fitness Tracking)
+    https://myfitnesspal.com
+
+---
+
+## 🏠 Productivity & Lifestyle
+
+39. Evernote (Note Taking)
+    https://evernote.com
+
+40. Todoist (Task Management)
+    https://todoist.com
+
+41. Grammarly (Writing Assistant)
+    https://grammarly.com
+
+---
+
+## ⚡ Quick Test URLs (Copy & Paste Ready)
+
+For quick testing, use these:
+
+https://stripe.com
+https://notion.so
+https://figma.com
+https://slack.com
+https://vercel.com
+https://linear.app
+https://loom.com
+https://grammarly.com
+
+---
+
+## 💡 Tips for Best Results
+
+✅ **Works Great:**
+- Company homepages (stripe.com, notion.so)
+- Product landing pages
+- Simple, content-rich pages
+- Pages with clear product descriptions
+
+❌ **May Not Work Well:**
+- JavaScript-heavy single-page apps
+- Pages behind authentication
+- Pages with bot protection (Cloudflare challenges)
+- Very slow-loading pages (>10 second timeout)
+
+---
+
+## 🎯 My Top 5 Recommendations
+
+For the best demo/testing experience, try these in order:
+
+1. **Stripe** - https://stripe.com
+   → Great for fintech/payment processing marketing
+
+2. **Notion** - https://notion.so
+   → Perfect for productivity tool marketing
+
+3. **Figma** - https://figma.com
+   → Excellent for design tool marketing
+
+4. **Linear** - https://linear.app
+   → Modern SaaS, clean content
+
+5. **Loom** - https://loom.com
+   → Simple product, clear value prop
+
+---
+
+## 🧪 Testing Different Industries
+
+Want to see how the AI handles different industries?
+
+- **B2B SaaS:** Stripe, Slack, Notion
+- **Developer Tools:** GitHub, Vercel, Supabase
+- **Design Tools:** Figma, Canva, Adobe
+- **Consumer Apps:** Duolingo, Calm, Grammarly
+- **E-commerce:** Shopify, Etsy, WooCommerce
+
+---
+
+## 📝 What to Expect
+
+When you use a URL, the scraper will:
+1. Fetch the page HTML
+2. Extract title, meta description, headings, paragraphs
+3. Clean the content (remove navigation, scripts, etc.)
+4. Chunk to 4000 characters max
+5. Send to the 3-step LLM pipeline
+
+Good URLs = Better marketing strategies! 🚀
