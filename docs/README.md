@@ -184,7 +184,7 @@ Dark Mode:  #2C2C2C (background) + #FAFAFA (text)
 **Backend:**
 - FastAPI (Python web framework)
 - Pydantic (data validation)
-- Google Gemini API (LLM)
+- Google Vertex AI (LLM with Gemini models)
 - BeautifulSoup4 (web scraping)
 - ReportLab (PDF generation)
 

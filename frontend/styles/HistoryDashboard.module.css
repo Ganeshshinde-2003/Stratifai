@@ -72,7 +72,7 @@
 
 .searchIcon {
   font-size: 1.25rem;
-  color: #9CA3AF;
+  color: var(--text-muted);
 }
 
 .searchInput {
@@ -85,11 +85,11 @@
 }
 
 .searchInput::placeholder {
-  color: #9CA3AF;
+  color: var(--text-muted);
 }
 
 .clearButton {
-  background: #F3F4F6;
+  background: var(--bg-tertiary);
   border: none;
   width: 24px;
   height: 24px;
@@ -98,14 +98,14 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: #6B7280;
+  color: var(--text-muted);
   font-size: 0.875rem;
   transition: all 0.2s;
 }
 
 .clearButton:hover {
-  background: #E5E7EB;
-  color: #374151;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
 }
 
 /* Grid */
@@ -185,7 +185,7 @@
   gap: 1rem;
   margin-bottom: 1.25rem;
   padding: 1rem;
-  background: #F9FAFB;
+  background: var(--bg-tertiary);
   border-radius: 10px;
 }
 
@@ -209,7 +209,7 @@
 
 .metricLabel {
   font-size: 0.75rem;
-  color: #6B7280;
+  color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -220,11 +220,11 @@
   justify-content: space-between;
   align-items: center;
   padding-top: 1rem;
-  border-top: 1px solid #E5E7EB;
+  border-top: 1px solid var(--border-color);
 }
 
 .timestamp {
-  color: #9CA3AF;
+  color: var(--text-muted);
   font-size: 0.875rem;
 }
 

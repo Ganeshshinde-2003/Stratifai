@@ -87,19 +87,32 @@ npm --version   # Should show npm version
 
 ---
 
-### 3. Google Gemini API Key
+### 3. Google Cloud Platform & Vertex AI Setup
 
 **This is REQUIRED for the AI to work.**
 
-**How to get your API key:**
+**How to set up Vertex AI:**
 
-1. Go to: https://makersuite.google.com/app/apikey
-2. Sign in with your Google account
-3. Click **"Create API Key"** or **"Get API Key"**
-4. Copy the key (it will look like: `AIzaSyC...`)
-5. Keep it safe - you'll need it in the next section
+1. Go to: https://console.cloud.google.com
+2. Create a new project or select an existing one
+3. Enable the Vertex AI API:
+   - Go to https://console.cloud.google.com/apis/library/aiplatform.googleapis.com
+   - Click "Enable"
+4. Create a Service Account:
+   - Go to IAM & Admin > Service Accounts
+   - Click "Create Service Account"
+   - Name it (e.g., "stratifai-service-account")
+   - Grant role: "Vertex AI User"
+   - Click "Done"
+5. Create and download credentials:
+   - Click on your service account
+   - Go to "Keys" tab
+   - Click "Add Key" > "Create new key"
+   - Choose "JSON" format
+   - Download the JSON file
+6. Keep the JSON file safe - you'll need it in the next section
 
-**Note:** The API key is free to start. Google provides a generous free tier.
+**Note:** Vertex AI has a free tier. Check https://cloud.google.com/vertex-ai/pricing
 
 ---
 
@@ -139,17 +152,32 @@ open .env  # Opens in default text editor
 notepad .env
 ```
 
-**Update the file to look like this:**
+**Update the file with your Vertex AI credentials:**
+
+1. Open the downloaded JSON credentials file
+2. Copy the entire JSON content
+3. Update `.env` to look like this:
+
 ```env
-# Backend Configuration
-GEMINI_API_KEY=AIzaSyC_YOUR_ACTUAL_API_KEY_HERE
+# Backend Configuration - Vertex AI
 PORT=8000
+PROJECT_ID=your-gcp-project-id
+LOCATION=us-central1
+
+google_credentials='paste-your-entire-json-here-on-one-line'
 
 # Frontend Configuration
 NEXT_PUBLIC_API_URL=http://localhost:8000/api
 ```
 
-Replace `AIzaSyC_YOUR_ACTUAL_API_KEY_HERE` with your actual Gemini API key.
+Replace:
+- `your-gcp-project-id` with your actual GCP project ID (found in the JSON as "project_id")
+- `paste-your-entire-json-here-on-one-line` with the entire JSON credentials (format it as a single-line string with single quotes)
+
+**Example format:**
+```env
+google_credentials='{"type":"service_account","project_id":"my-project",...}'
+```
 
 **Save and close the file.**
 
@@ -201,7 +229,7 @@ pip install -r requirements.txt
 **Verify installation:**
 ```bash
 pip list
-# You should see fastapi, uvicorn, google-generativeai, etc.
+# You should see fastapi, uvicorn, google-cloud-aiplatform, etc.
 ```
 
 ---
@@ -372,20 +400,22 @@ You should see the **AI Marketing Intelligence Engine** homepage with:
 
 ## 🐛 Common Issues and Solutions
 
-### Issue 1: "GEMINI_API_KEY is required"
+### Issue 1: "PROJECT_ID is required" or "google_credentials is required"
 
-**Problem:** Backend can't find your API key
+**Problem:** Backend can't find your Vertex AI credentials
 
 **Solution:**
 ```bash
 # Check if .env file exists
 ls -la .env
 
-# Verify it contains your API key
+# Verify it contains your credentials
 cat .env
 
-# Make sure it looks like:
-# GEMINI_API_KEY=AIzaSyC...your_key...
+# Make sure it has:
+# PROJECT_ID=your-project-id
+# LOCATION=us-central1
+# google_credentials='{"type":"service_account",...}'
 ```
 
 ---
@@ -603,7 +633,7 @@ If you're still stuck:
    - `DELIVERABLES.md` - Feature checklist
 
 3. **Common error messages:**
-   - "GEMINI_API_KEY is required" → Check `.env` file
+   - "PROJECT_ID is required" → Check `.env` file has Vertex AI credentials
    - "Port already in use" → Kill process or change port
    - "Module not found" → Install dependencies
    - "Connection refused" → Backend not running
@@ -616,8 +646,8 @@ Before you start building, verify:
 
 - [ ] Python 3.10+ installed (`python3 --version`)
 - [ ] Node.js 18+ installed (`node --version`)
-- [ ] Gemini API key obtained
-- [ ] `.env` file created with API key
+- [ ] GCP Service Account credentials obtained
+- [ ] `.env` file created with Vertex AI credentials
 - [ ] Backend dependencies installed (`pip list`)
 - [ ] Frontend dependencies installed (`npm list`)
 - [ ] Backend running (`http://localhost:8000/health` returns JSON)

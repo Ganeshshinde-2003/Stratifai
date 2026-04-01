@@ -735,7 +735,7 @@ END:VCALENDAR`;
             >
             <div className={styles.exportGrid}>
               <div className={styles.exportCard} onClick={onDownloadPDF}>
-                <div className={styles.exportIcon}>PDF</div>
+                <div className={styles.exportIcon}>📄</div>
                 <h3 className={styles.exportTitle}>Download PDF</h3>
                 <p className={styles.exportDescription}>
                   Professional PDF report with all sections
@@ -744,7 +744,7 @@ END:VCALENDAR`;
               </div>
 
               <div className={styles.exportCard}>
-                <div className={styles.exportIcon}>Copy</div>
+                <div className={styles.exportIcon}>📋</div>
                 <h3 className={styles.exportTitle}>Copy All</h3>
                 <p className={styles.exportDescription}>
                   Copy entire strategy as formatted text
@@ -782,7 +782,7 @@ CTA: ${data.landing_page.cta}
               </div>
 
               <div className={styles.exportCard}>
-                <div className={styles.exportIcon}>{ }</div>
+                <div className={styles.exportIcon}>📦</div>
                 <h3 className={styles.exportTitle}>Download JSON</h3>
                 <p className={styles.exportDescription}>
                   Raw JSON data for integrations
@@ -806,7 +806,7 @@ CTA: ${data.landing_page.cta}
               </div>
 
               <div className={styles.exportCard}>
-                <div className={styles.exportIcon}>Markdown</div>
+                <div className={styles.exportIcon}>📝</div>
                 <h3 className={styles.exportTitle}>Download Markdown</h3>
                 <p className={styles.exportDescription}>
                   Markdown format for documentation
@@ -856,7 +856,7 @@ ${data.landing_page.sections.map((s, i) => `${i + 1}. ${s}`).join('\n')}
               </div>
 
               <div className={styles.exportCard}>
-                <div className={styles.exportIcon}>CSV</div>
+                <div className={styles.exportIcon}>📊</div>
                 <h3 className={styles.exportTitle}>Export to CSV</h3>
                 <p className={styles.exportDescription}>
                   Spreadsheet format for data analysis
@@ -871,7 +871,7 @@ ${data.landing_page.sections.map((s, i) => `${i + 1}. ${s}`).join('\n')}
 
               {data.social_media && (
                 <div className={styles.exportCard}>
-                  <div className={styles.exportIcon}>Social</div>
+                  <div className={styles.exportIcon}>📱</div>
                   <h3 className={styles.exportTitle}>Social Media Templates</h3>
                   <p className={styles.exportDescription}>
                     Ready-to-paste content for all platforms
@@ -887,7 +887,7 @@ ${data.landing_page.sections.map((s, i) => `${i + 1}. ${s}`).join('\n')}
 
               {data.social_media && (
                 <div className={styles.exportCard}>
-                  <div className={styles.exportIcon}>Calendar</div>
+                  <div className={styles.exportIcon}>📅</div>
                   <h3 className={styles.exportTitle}>Content Calendar</h3>
                   <p className={styles.exportDescription}>
                     30-day posting schedule (.ics file)

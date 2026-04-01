@@ -120,7 +120,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
     - Step 1: Product Understanding (temperature 0.2) - Factual analysis
     - Step 2: Marketing Strategy (temperature 0.5) - Strategic planning
     - Step 3: Content Generation (temperature 0.8) - Creative copywriting
-  - Google Gemini API integration (gemini-1.5-flash model)
+  - Google Vertex AI integration (gemini-2.5-flash-lite model)
   - JSON validation with automatic retry logic (max 3 attempts)
   - Markdown code block detection and extraction
   - Pydantic model validation for all outputs

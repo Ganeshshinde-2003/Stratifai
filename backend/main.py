@@ -3,15 +3,17 @@ from fastapi.middleware.cors import CORSMiddleware
 from routes import generate
 import os
 from dotenv import load_dotenv
+from pathlib import Path
 
-# Load environment variables
-load_dotenv()
+# Load environment variables from parent directory
+env_path = Path(__file__).parent.parent / '.env'
+load_dotenv(dotenv_path=env_path)
 
 # Initialize FastAPI app
 app = FastAPI(
-    title="AI Marketing Intelligence Engine",
-    description="Generate comprehensive marketing strategies using AI",
-    version="1.0.0",
+    title="Stratifai",
+    description="Complete Marketing Strategy Generated in 60 Seconds",
+    version="1.1.0",
     docs_url="/api/docs",
     redoc_url="/api/redoc"
 )
@@ -33,8 +35,8 @@ app.include_router(generate.router, prefix="/api", tags=["Marketing Strategy"])
 async def root():
     """Root endpoint"""
     return {
-        "message": "AI Marketing Intelligence Engine API",
-        "version": "1.0.0",
+        "message": "Stratifai API",
+        "version": "1.1.0",
         "docs": "/api/docs"
     }
 
@@ -44,8 +46,8 @@ async def health_check():
     """Health check endpoint"""
     return {
         "status": "healthy",
-        "service": "AI Marketing Intelligence Engine",
-        "version": "1.0.0"
+        "service": "Stratifai",
+        "version": "1.1.0"
     }
 
 

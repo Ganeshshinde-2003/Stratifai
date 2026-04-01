@@ -15,20 +15,22 @@ if [ ! -f .env ]; then
     echo "Creating .env from .env.example..."
     cp .env.example .env
     echo ""
-    echo "⚠️  IMPORTANT: Please edit .env and add your GEMINI_API_KEY"
-    echo "   1. Get API key from: https://makersuite.google.com/app/apikey"
-    echo "   2. Open .env file and replace 'your_gemini_api_key_here'"
-    echo "   3. Run this script again"
+    echo "⚠️  IMPORTANT: Please edit .env and add your Vertex AI credentials"
+    echo "   1. Set up GCP project and Vertex AI: https://console.cloud.google.com"
+    echo "   2. Create Service Account with Vertex AI User role"
+    echo "   3. Download JSON credentials and add to .env file"
+    echo "   4. Run this script again"
     echo ""
     exit 1
 fi
 
-# Check if GEMINI_API_KEY is set
-if grep -q "your_gemini_api_key_here" .env; then
-    echo "⚠️  GEMINI_API_KEY not configured!"
+# Check if Vertex AI credentials are set
+if grep -q "your-gcp-project-id" .env || grep -q "your-project-id" .env; then
+    echo "⚠️  Vertex AI credentials not configured!"
     echo ""
-    echo "Please edit .env and add your actual API key"
-    echo "Get one from: https://makersuite.google.com/app/apikey"
+    echo "Please edit .env and add your Vertex AI credentials"
+    echo "Set PROJECT_ID, LOCATION, and google_credentials"
+    echo "See: https://console.cloud.google.com"
     echo ""
     exit 1
 fi

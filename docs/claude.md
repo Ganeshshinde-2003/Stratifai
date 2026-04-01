@@ -36,7 +36,7 @@ This document explains the technical architecture, design decisions, and impleme
 └──────┼─────────────────┼──────────────────┼───────────────┘
        │                 │                  │
    ┌───▼───┐       ┌─────▼──────┐    ┌─────▼─────┐
-   │Website│       │Gemini API  │    │PDF File   │
+   │Website│       │Vertex AI   │    │PDF File   │
    └───────┘       └────────────┘    └───────────┘
 ```
 
@@ -192,7 +192,7 @@ for attempt in range(max_retries):
 ```
 
 **Design Decisions**:
-- Google Gemini API (cost-effective, fast, good quality)
+- Google Vertex AI (enterprise-grade, fast, high quality with Gemini models)
 - Pydantic validation (ensures output structure matches schema)
 - Retry logic with stricter prompts (handles occasional formatting issues)
 - Separate model calls (not streaming = simpler, more reliable)
@@ -246,15 +246,15 @@ class PDFGenerator:
 5. Scraper fetches URL, extracts content
 6. Content chunked to 4000 chars
 7. LLM Pipeline Step 1: Product Understanding
-   - Call Gemini with temperature=0.2
+   - Call Vertex AI with temperature=0.2
    - Validate JSON response
    - Parse into ProductUnderstanding model
 8. LLM Pipeline Step 2: Marketing Strategy
-   - Call Gemini with Step 1 output, temperature=0.5
+   - Call Vertex AI with Step 1 output, temperature=0.5
    - Validate JSON response
    - Parse into MarketingStrategy model
 9. LLM Pipeline Step 3: Content Generation
-   - Call Gemini with Step 1+2 output, temperature=0.8
+   - Call Vertex AI with Step 1+2 output, temperature=0.8
    - Validate JSON response
    - Parse into ContentGeneration model
 10. Merge into FinalOutput model
@@ -278,7 +278,7 @@ class PDFGenerator:
 - Invalid URL (scraper) → 400 Bad Request
 - Scraping failed → 400 with detail message
 - Empty content → 400 "Content too short"
-- Gemini API error → 500 with detail
+- Vertex AI error → 500 with detail
 - JSON validation failed (3 retries) → 500 with detail
 
 ## Performance Considerations
@@ -327,7 +327,7 @@ class PDFGenerator:
 
 **Unit Tests**:
 - Scraper: Mock HTTP responses, test extraction
-- LLM Pipeline: Mock Gemini API, test JSON parsing
+- LLM Pipeline: Mock Vertex AI, test JSON parsing
 - PDF Generator: Test output structure
 - Models: Test validators
 

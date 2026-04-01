@@ -124,6 +124,6 @@ async def health_check():
     """Health check endpoint"""
     return {
         "status": "healthy",
-        "service": "AI Marketing Intelligence Engine",
-        "version": "1.0.0"
+        "service": "Stratifai",
+        "version": "1.1.0"
     }

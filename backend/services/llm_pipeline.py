@@ -1,7 +1,9 @@
-import google.generativeai as genai
+import vertexai
+from vertexai.preview.generative_models import GenerativeModel, GenerationConfig
 import json
 import os
 from typing import Dict, Any
+from google.oauth2 import service_account
 from models.schemas import (
     ProductUnderstanding,
     MarketingStrategy,
@@ -17,20 +19,40 @@ from services.scraper import WebScraper
 class LLMPipeline:
     """
     Multi-step LLM pipeline for marketing strategy generation
-    Uses Google Gemini API
+    Uses Google Vertex AI with Gemini models
     """
 
-    def __init__(self, api_key: str = None):
-        """Initialize the LLM pipeline with Gemini API"""
-        self.api_key = api_key or os.getenv('GEMINI_API_KEY')
-        if not self.api_key:
-            raise ValueError("GEMINI_API_KEY is required")
+    def __init__(self):
+        """Initialize the LLM pipeline with Vertex AI credentials"""
+        # Get configuration from environment
+        project_id = os.getenv('PROJECT_ID')
+        location = os.getenv('LOCATION', 'us-central1')
+        google_credentials_json = os.getenv('google_credentials')
 
-        genai.configure(api_key=self.api_key)
+        if not project_id:
+            raise ValueError("PROJECT_ID is required")
+        if not google_credentials_json:
+            raise ValueError("google_credentials is required")
+
+        # Parse credentials JSON
+        try:
+            credentials_info = json.loads(google_credentials_json)
+            credentials = service_account.Credentials.from_service_account_info(credentials_info)
+        except json.JSONDecodeError as e:
+            raise ValueError(f"Invalid google_credentials JSON: {str(e)}")
+
+        # Initialize Vertex AI
+        vertexai.init(
+            project=project_id,
+            location=location,
+            credentials=credentials
+        )
+
+        print(f"Vertex AI initialized: Project={project_id}, Location={location}")
 
     def _call_gemini(self, prompt: str, temperature: float = 0.5, max_retries: int = 3) -> Dict[str, Any]:
         """
-        Call Gemini API with JSON validation and retry logic
+        Call Vertex AI Gemini with JSON validation and retry logic
 
         Args:
             prompt: The prompt to send
@@ -40,12 +62,14 @@ class LLMPipeline:
         Returns:
             Parsed JSON response
         """
-        model = genai.GenerativeModel('gemini-2.5-flash-lite')
+        # Use Gemini 2.5 Flash Lite via Vertex AI
+        model = GenerativeModel('gemini-2.5-flash-lite')
 
         for attempt in range(max_retries):
             try:
-                generation_config = genai.types.GenerationConfig(
+                generation_config = GenerationConfig(
                     temperature=temperature,
+                    max_output_tokens=8192,
                 )
 
                 response = model.generate_content(
@@ -74,9 +98,9 @@ class LLMPipeline:
                     raise Exception(f"Failed to get valid JSON after {max_retries} attempts: {str(e)}")
 
             except Exception as e:
-                raise Exception(f"Gemini API error: {str(e)}")
+                raise Exception(f"Vertex AI Gemini error: {str(e)}")
 
-        raise Exception("Failed to get valid response from Gemini")
+        raise Exception("Failed to get valid response from Vertex AI Gemini")
 
     def step1_product_understanding(self, content: str) -> ProductUnderstanding:
         """

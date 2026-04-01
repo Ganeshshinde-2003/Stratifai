@@ -94,7 +94,7 @@ The engine uses a sophisticated 3-step pipeline (not a single prompt):
 ### Backend
 - **FastAPI**: Modern Python web framework
 - **Pydantic**: Data validation and settings
-- **Google Gemini API**: LLM for strategy generation
+- **Google Vertex AI**: LLM for strategy generation (Gemini models)
 - **BeautifulSoup4**: Web scraping
 - **ReportLab**: PDF generation
 

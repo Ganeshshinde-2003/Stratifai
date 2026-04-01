@@ -34,14 +34,16 @@ python main.py
 
 ---
 
-### 2. ValueError: GEMINI_API_KEY is required
+### 2. ValueError: PROJECT_ID is required / google_credentials is required
 
 **Error Message:**
 ```
-ValueError: GEMINI_API_KEY is required
+ValueError: PROJECT_ID is required
+# or
+ValueError: google_credentials is required
 ```
 
-**Cause:** API key not configured or not accessible
+**Cause:** Vertex AI credentials not configured or not accessible
 
 **Solution:**
 
@@ -50,28 +52,30 @@ ValueError: GEMINI_API_KEY is required
    ls -la .env
    ```
 
-2. **Verify it contains your API key:**
+2. **Verify it contains your Vertex AI credentials:**
    ```bash
    cat .env
-   # Should show: GEMINI_API_KEY=AIzaSyC...
+   # Should show:
+   # PROJECT_ID=your-gcp-project-id
+   # LOCATION=us-central1
+   # google_credentials='{"type":"service_account",...}'
    ```
 
 3. **If missing, create it:**
    ```bash
    cp .env.example .env
-   # Edit .env and add your actual API key
+   # Edit .env and add your Vertex AI credentials from GCP Service Account JSON
    ```
 
-4. **Get API key:**
-   - Visit: https://makersuite.google.com/app/apikey
-   - Sign in with Google
-   - Click "Create API Key"
-   - Copy and paste into .env file
+4. **Get Vertex AI credentials:**
+   - Visit: https://console.cloud.google.com
+   - Go to IAM & Admin > Service Accounts
+   - Create or select a service account with "Vertex AI User" role
+   - Create and download JSON key
+   - Copy the JSON content to google_credentials in .env (as single-line string)
 
-5. **If using manual start, ensure .env is in backend directory:**
-   ```bash
-   cp .env backend/.env
-   ```
+5. **If using manual start, ensure .env is accessible from backend:**
+   - The backend loads from parent directory .env file automatically
 
 ---
 
@@ -286,15 +290,16 @@ Failed to scrape URL: ...
 Failed to get valid JSON after 3 attempts
 ```
 
-**Cause:** Gemini API occasionally returns malformed JSON
+**Cause:** Vertex AI occasionally returns malformed JSON
 
 **Solution:**
 
 1. **This is already handled by retry logic (3 attempts)**
 
 2. **If persistent:**
-   - Check API key is valid
-   - Check Gemini API quota: https://console.cloud.google.com/
+   - Check Vertex AI credentials are valid
+   - Check Vertex AI quota: https://console.cloud.google.com/
+   - Verify Vertex AI API is enabled for your project
    - Try again in a few minutes
 
 ---
@@ -367,8 +372,8 @@ which python        # Should point to venv/bin/python
 pip list            # Should show fastapi, uvicorn, etc.
 npm list --depth=0  # Should show next, react, etc.
 
-# 5. API key configured
-cat .env            # Should contain actual API key
+# 5. Vertex AI credentials configured
+cat .env            # Should contain PROJECT_ID, LOCATION, and google_credentials
 
 # 6. Ports free
 lsof -i :8000       # Should be empty
@@ -407,7 +412,7 @@ npm install
 
 # 5. Verify .env exists and is correct
 cd ..
-cat .env  # Should have your actual API key
+cat .env  # Should have your Vertex AI credentials
 
 # 6. Start fresh
 ./start.sh

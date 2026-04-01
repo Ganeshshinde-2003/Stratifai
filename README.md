@@ -161,7 +161,7 @@ Stratifai generates a complete marketing strategy in **60 seconds**:
 ### Backend
 - **FastAPI** - Modern Python web framework with auto-generated docs
 - **Pydantic** - Data validation and settings management
-- **Google Gemini API** - LLM for strategy generation (cost-effective)
+- **Google Vertex AI** - LLM for strategy generation (Gemini models)
 - **BeautifulSoup4** - Web scraping and content extraction
 - **ReportLab** - Professional PDF generation
 
@@ -178,7 +178,8 @@ Stratifai generates a complete marketing strategy in **60 seconds**:
 ### Prerequisites
 - Python 3.10 or higher
 - Node.js 18 or higher
-- Google Gemini API key ([Get one free](https://makersuite.google.com/app/apikey))
+- Google Cloud Platform account with Vertex AI enabled
+- GCP Service Account credentials JSON
 
 ### 1. Clone Repository
 
@@ -193,8 +194,10 @@ cd ai-marketing-strategy-builder
 # Copy environment template
 cp .env.example .env
 
-# Edit .env and add your Gemini API key
-# GEMINI_API_KEY=your_api_key_here
+# Edit .env and add your Vertex AI credentials:
+# PROJECT_ID=your-gcp-project-id
+# LOCATION=us-central1
+# google_credentials='{"type":"service_account",...}'
 ```
 
 ### 3. Backend Setup
@@ -512,7 +515,7 @@ Content Chunking (4000 chars max)
     ↓
 ┌─────────────────────────────┐
 │   3-Step LLM Pipeline       │
-│   (Google Gemini API)       │
+│   (Google Vertex AI)        │
 │                             │
 │  Step 1 → JSON validation   │
 │  Step 2 → JSON validation   │
@@ -622,16 +625,16 @@ venv\Scripts\activate     # Windows
 pip install -r requirements.txt
 ```
 
-**Error: ValueError: GEMINI_API_KEY is required**
+**Error: ValueError: PROJECT_ID is required**
 
 ```bash
 # Check .env file
 cat .env
 
-# Should contain: GEMINI_API_KEY=your_key_here
+# Should contain: PROJECT_ID, LOCATION, and google_credentials
 # If missing:
 cp .env.example .env
-# Edit .env and add your Gemini API key
+# Edit .env and add your Vertex AI credentials
 ```
 
 **Error: Port 8000 already in use**
@@ -691,7 +694,7 @@ npm run dev
 
 **Problem: LLM returns invalid JSON**
 - Retry logic handles this (max 3 attempts)
-- **Solution:** Check Gemini API key and quota limits
+- **Solution:** Check Vertex AI credentials and quota limits
 
 **Problem: PDF download not working**
 - Check browser console for errors
@@ -735,7 +738,9 @@ railway up
 ```
 
 **Environment Variables:**
-- `GEMINI_API_KEY` - Your Gemini API key
+- `PROJECT_ID` - Your GCP project ID
+- `LOCATION` - Vertex AI location (default: us-central1)
+- `google_credentials` - GCP service account credentials JSON
 - `PORT` - Port number (default: 8000)
 - `ALLOWED_ORIGINS` - CORS origins (your frontend URL)
 
@@ -760,7 +765,7 @@ railway up
 - **Backend Memory:** ~100MB base
 - **API Response:** <100ms (excluding LLM)
 - **LLM Tokens:** ~3,000-5,000 per generation
-- **Cost per Strategy:** ~$0.01-0.03 (Gemini pricing)
+- **Cost per Strategy:** ~$0.01-0.03 (Vertex AI pricing)
 
 ### Optimization
 
@@ -831,7 +836,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 Built with:
 - [FastAPI](https://fastapi.tiangolo.com) - Modern Python web framework
 - [Next.js](https://nextjs.org) - React framework for production
-- [Google Gemini API](https://ai.google.dev) - Cost-effective LLM
+- [Google Vertex AI](https://cloud.google.com/vertex-ai) - Enterprise AI platform with Gemini models
 - [Framer Motion](https://www.framer.com/motion/) - Animation library
 - [Recharts](https://recharts.org) - Charting library
 - [ReportLab](https://www.reportlab.com) - PDF generation

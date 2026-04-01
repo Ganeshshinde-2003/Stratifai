@@ -14,10 +14,11 @@ if not exist .env (
     echo Creating .env from .env.example...
     copy .env.example .env
     echo.
-    echo [WARNING] IMPORTANT: Please edit .env and add your GEMINI_API_KEY
-    echo    1. Get API key from: https://makersuite.google.com/app/apikey
-    echo    2. Open .env file and replace 'your_gemini_api_key_here'
-    echo    3. Run this script again
+    echo [WARNING] IMPORTANT: Please edit .env and add your Vertex AI credentials
+    echo    1. Set up GCP project and Vertex AI: https://console.cloud.google.com
+    echo    2. Create Service Account with Vertex AI User role
+    echo    3. Download JSON credentials and add to .env file
+    echo    4. Run this script again
     echo.
     pause
     exit /b 1
