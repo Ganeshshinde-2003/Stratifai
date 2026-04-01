@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import LandingPage from '../components/LandingPage';
 import InputForm from '../components/InputForm';
@@ -22,6 +22,11 @@ export default function Home() {
   const [result, setResult] = useState<MarketingStrategy | null>(null);
   const [currentInput, setCurrentInput] = useState<{ data: string; type: 'url' | 'text' } | null>(null);
   const [currentBrandVoice, setCurrentBrandVoice] = useState<string>('professional');
+
+  // Wake up backend on page load (for free tier hosting that spins down)
+  useEffect(() => {
+    api.healthCheck();
+  }, []);
 
   const handleSubmit = async (inputData: string, inputType: 'url' | 'text', brandVoice: string, competitorUrls: string[], autoDetect: boolean) => {
     setView('loading');

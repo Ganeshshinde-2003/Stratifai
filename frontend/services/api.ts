@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
+const HEALTH_URL = process.env.NEXT_PUBLIC_API_URL?.replace('/api', '') || 'http://localhost:8000';
 
 export interface InputRequest {
   input_data: string;
@@ -108,6 +109,17 @@ export const api = {
       window.URL.revokeObjectURL(url);
     } catch (error: any) {
       throw new Error('Failed to download PDF');
+    }
+  },
+
+  async healthCheck(): Promise<void> {
+    try {
+      await axios.get(`${HEALTH_URL}/health`, {
+        timeout: 5000,
+      });
+    } catch (error) {
+      // Silent fail - this is just to wake up the backend
+      console.log('Backend warming up...');
     }
   },
 };
