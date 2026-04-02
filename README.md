@@ -10,4 +10,4 @@ Generate a complete marketing strategy (ads, emails, landing pages, SEO, competi
 
 ## 🔗 Live Demo
 
-[[View Live Demo](link)](https://stratifai-3znf.vercel.app/)
+https://stratifai-3znf.vercel.app/
