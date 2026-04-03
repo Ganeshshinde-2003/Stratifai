@@ -71,7 +71,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
     {
       quote: 'A very seamless platform to use. Generating a content strategy by simply adding a website link is incredibly efficient. The email template feature stands out and will save significant time.',
       name: 'Ishan Tandel',
-      role: 'Founder at Srinova Design'
+      role: 'Founder @Srinova Design'
     }
   ];
 
