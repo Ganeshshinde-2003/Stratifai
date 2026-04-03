@@ -67,6 +67,14 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
     }
   ];
 
+  const testimonials = [
+    {
+      quote: 'A very seamless platform to use. Generating a content strategy by simply adding a website link is incredibly efficient. The email template feature stands out and will save significant time.',
+      name: 'Ishan Tandel',
+      role: 'Founder at Srinova Design'
+    }
+  ];
+
   return (
     <div className={styles.page}>
       {/* Theme Toggle */}
@@ -217,6 +225,37 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
                 </div>
                 {index < howItWorks.length - 1 && <div className={styles.stepConnector} />}
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className={styles.testimonials}>
+        <div className={styles.container}>
+          <h2 className={styles.sectionTitle}>Trusted by Founders</h2>
+          <p className={styles.sectionSubtitle}>
+            See what founders are saying about Stratifai
+          </p>
+          <div className={styles.testimonialsGrid}>
+            {testimonials.map((testimonial, index) => (
+              <motion.div
+                key={index}
+                className={styles.testimonialCard}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <div className={styles.quoteIcon}>"</div>
+                <p className={styles.testimonialQuote}>{testimonial.quote}</p>
+                <div className={styles.testimonialAuthor}>
+                  <div className={styles.authorInfo}>
+                    <p className={styles.authorName}>{testimonial.name}</p>
+                    <p className={styles.authorRole}>{testimonial.role}</p>
+                  </div>
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
