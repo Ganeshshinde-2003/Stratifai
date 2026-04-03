@@ -1,15 +1,82 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '../contexts/ThemeContext';
 import ThemeToggle from './ThemeToggle';
+import CaseStudyModal from './CaseStudyModal';
 import styles from '../styles/LandingPage.module.css';
 
 interface LandingPageProps {
   onGetStarted: () => void;
 }
 
+interface CaseStudy {
+  title: string;
+  type: string;
+  productAnalyzed: {
+    name: string;
+    description: string;
+  };
+  toolUsed: {
+    name: string;
+    description: string;
+  };
+  whatIDid: {
+    summary: string;
+    outputsGenerated: string[];
+  };
+  keyInsight: {
+    problem: string;
+    newPositioning: string;
+    reasoning: string;
+  };
+  sampleOutput: {
+    adCopy: string;
+  };
+  whatWasMissingBefore: string[];
+  founderFeedback: {
+    role: string;
+    quote: string;
+  };
+  impact: {
+    timeToGenerateStrategy: string;
+    benefits: string[];
+  };
+}
+
+interface Testimonial {
+  quote: string;
+  name: string;
+  role: string;
+  caseStudy?: CaseStudy;
+}
+
 const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
   const { theme } = useTheme();
+  const [selectedCaseStudy, setSelectedCaseStudy] = useState<{
+    caseStudy: any;
+    founderName: string;
+  } | null>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const paginate = (newDirection: number) => {
+    const newIndex = (currentIndex + newDirection + testimonials.length) % testimonials.length;
+    setCurrentIndex(newIndex);
+  };
+
+  const getVisibleTestimonials = () => {
+    const total = testimonials.length;
+    const prevIndex = (currentIndex - 1 + total) % total;
+    const nextIndex = (currentIndex + 1) % total;
+
+    return {
+      prev: testimonials[prevIndex],
+      current: testimonials[currentIndex],
+      next: testimonials[nextIndex],
+      prevIndex,
+      currentIndex,
+      nextIndex
+    };
+  };
 
   const features = [
     {
@@ -67,11 +134,60 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
     }
   ];
 
-  const testimonials = [
+  const testimonials: Testimonial[] = [
     {
       quote: 'A very seamless platform to use. Generating a content strategy by simply adding a website link is incredibly efficient. The email template feature stands out and will save significant time.',
       name: 'Ishan Tandel',
-      role: 'Founder @Srinova Design'
+      role: 'Founder @Srinova Design',
+      caseStudy: {
+        title: 'Srinova Design',
+        type: 'Founder-led Case Study',
+        productAnalyzed: {
+          name: 'Srinova Design',
+          description: 'A design-focused product built to help businesses strengthen their digital presence and branding experiences.'
+        },
+        toolUsed: {
+          name: 'Stratifai',
+          description: 'An AI platform that analyzes a website link to generate marketing strategy, assets, email templates, and competitor insights.'
+        },
+        whatIDid: {
+          summary: 'I ran Srinova Design through Stratifai to evaluate and improve its marketing and positioning.',
+          outputsGenerated: [
+            'Marketing positioning',
+            'Ad copy variations',
+            'Landing page structure',
+            'Email campaign templates',
+            'Competitor analysis and positioning insights'
+          ]
+        },
+        keyInsight: {
+          problem: 'Srinova Design was positioned too broadly, similar to generic content and design tools.',
+          newPositioning: 'An AI-powered growth assistant that turns any website into a ready-to-execute marketing strategy in seconds.',
+          reasoning: 'Competitor analysis showed most tools focus only on content generation, while speed, clarity, and execution were under-owned value drivers.'
+        },
+        sampleOutput: {
+          adCopy: 'Turn your website into a complete marketing strategy in seconds. No guesswork, just execution.'
+        },
+        whatWasMissingBefore: [
+          'Clear niche targeting (founders vs marketers vs agencies)',
+          'Strong differentiation from generic AI tools',
+          'Clear emphasis on speed and execution',
+          'Competitive contrast in messaging'
+        ],
+        founderFeedback: {
+          role: 'Founder of Srinova Design',
+          quote: 'The platform is extremely seamless to use. I got a full content strategy and competitor breakdown just by dropping in my website link. I personally really like the email template feature—it\'s going to save me a ton of time.'
+        },
+        impact: {
+          timeToGenerateStrategy: 'Under 60 seconds',
+          benefits: [
+            'Generated a complete marketing strategy instantly',
+            'Received actionable competitor positioning insights',
+            'Replaced hours of manual research and planning',
+            'Unlocked clearer and more differentiated product positioning'
+          ]
+        }
+      }
     }
   ];
 
@@ -79,6 +195,16 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
     <div className={styles.page}>
       {/* Theme Toggle */}
       <ThemeToggle />
+
+      {/* Case Study Modal */}
+      {selectedCaseStudy && (
+        <CaseStudyModal
+          isOpen={true}
+          onClose={() => setSelectedCaseStudy(null)}
+          caseStudy={selectedCaseStudy.caseStudy}
+          founderName={selectedCaseStudy.founderName}
+        />
+      )}
 
       {/* Navigation */}
       <nav className={styles.nav}>
@@ -237,26 +363,107 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
           <p className={styles.sectionSubtitle}>
             See what founders are saying about Stratifai
           </p>
-          <div className={styles.testimonialsGrid}>
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                className={styles.testimonialCard}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
+          <div className={styles.carouselContainer}>
+            {testimonials.length > 1 && (
+              <button
+                className={`${styles.carouselArrow} ${styles.carouselArrowLeft}`}
+                onClick={() => paginate(-1)}
+                aria-label="Previous testimonial"
               >
-                <div className={styles.quoteIcon}>"</div>
-                <p className={styles.testimonialQuote}>{testimonial.quote}</p>
-                <div className={styles.testimonialAuthor}>
-                  <div className={styles.authorInfo}>
-                    <p className={styles.authorName}>{testimonial.name}</p>
-                    <p className={styles.authorRole}>{testimonial.role}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+                ‹
+              </button>
+            )}
+
+            <div className={styles.carouselTrack}>
+              {testimonials.length > 0 && (() => {
+                const visible = getVisibleTestimonials();
+                return (
+                  <>
+                    {/* Left (Previous) Testimonial */}
+                    {testimonials.length > 1 && (
+                      <motion.div
+                        key={`left-${visible.prevIndex}`}
+                        className={`${styles.testimonialCard} ${styles.testimonialSide}`}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 0.4, scale: 0.8, x: -280 }}
+                        transition={{ duration: 0.3 }}
+                        onClick={() => paginate(-1)}
+                      >
+                        <div className={styles.quoteIcon}>"</div>
+                        <p className={styles.testimonialQuote}>{visible.prev?.quote}</p>
+                        <div className={styles.testimonialAuthor}>
+                          <div className={styles.authorInfo}>
+                            <p className={styles.authorName}>{visible.prev?.name}</p>
+                            <p className={styles.authorRole}>{visible.prev?.role}</p>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+
+                    {/* Center (Current) Testimonial */}
+                    <motion.div
+                      key={`center-${visible.currentIndex}`}
+                      className={`${styles.testimonialCard} ${styles.testimonialCenter}`}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1, x: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <div className={styles.quoteIcon}>"</div>
+                      <p className={styles.testimonialQuote}>{visible.current?.quote}</p>
+                      <div className={styles.testimonialAuthor}>
+                        <div className={styles.authorInfo}>
+                          <p className={styles.authorName}>{visible.current?.name}</p>
+                          <p className={styles.authorRole}>{visible.current?.role}</p>
+                        </div>
+                      </div>
+                      {visible.current?.caseStudy && (
+                        <button
+                          className={styles.caseStudyButton}
+                          onClick={() => setSelectedCaseStudy({
+                            caseStudy: visible.current.caseStudy,
+                            founderName: visible.current.name
+                          })}
+                        >
+                          <span className={styles.caseStudyIcon}>📊</span>
+                          View Case Study by Founder
+                        </button>
+                      )}
+                    </motion.div>
+
+                    {/* Right (Next) Testimonial */}
+                    {testimonials.length > 1 && (
+                      <motion.div
+                        key={`right-${visible.nextIndex}`}
+                        className={`${styles.testimonialCard} ${styles.testimonialSide}`}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 0.4, scale: 0.8, x: 280 }}
+                        transition={{ duration: 0.3 }}
+                        onClick={() => paginate(1)}
+                      >
+                        <div className={styles.quoteIcon}>"</div>
+                        <p className={styles.testimonialQuote}>{visible.next?.quote}</p>
+                        <div className={styles.testimonialAuthor}>
+                          <div className={styles.authorInfo}>
+                            <p className={styles.authorName}>{visible.next?.name}</p>
+                            <p className={styles.authorRole}>{visible.next?.role}</p>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </>
+                );
+              })()}
+            </div>
+
+            {testimonials.length > 1 && (
+              <button
+                className={`${styles.carouselArrow} ${styles.carouselArrowRight}`}
+                onClick={() => paginate(1)}
+                aria-label="Next testimonial"
+              >
+                ›
+              </button>
+            )}
           </div>
         </div>
       </section>

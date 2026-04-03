@@ -356,14 +356,59 @@
 /* Testimonials Section */
 .testimonials {
   background: var(--bg-primary);
+  overflow: hidden;
 }
 
-.testimonialsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 2rem;
-  max-width: 900px;
+.carouselContainer {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 0 auto;
+  max-width: 1200px;
+}
+
+.carouselTrack {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carouselArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.2s;
+  z-index: 20;
+  padding: 0.5rem;
+}
+
+.carouselArrow:hover {
+  color: var(--accent);
+  transform: translateY(-50%) scale(1.2);
+}
+
+.carouselArrowLeft {
+  left: 20px;
+}
+
+.carouselArrowRight {
+  right: 20px;
 }
 
 .testimonialCard {
@@ -371,13 +416,26 @@
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
   border-radius: 8px;
-  position: relative;
+  position: absolute;
   transition: all 0.2s;
+  width: 800px;
+  min-height: 350px;
 }
 
-.testimonialCard:hover {
-  border-color: var(--accent);
-  transform: translateY(-2px);
+.testimonialCenter {
+  z-index: 10;
+  pointer-events: auto;
+}
+
+.testimonialSide {
+  z-index: 5;
+  pointer-events: auto;
+  cursor: pointer;
+  filter: blur(1px);
+}
+
+.testimonialSide:hover {
+  opacity: 0.6 !important;
 }
 
 .quoteIcon {
@@ -421,6 +479,33 @@
   font-size: 14px;
   color: var(--text-secondary);
   margin: 0;
+}
+
+.caseStudyButton {
+  margin-top: 1.5rem;
+  width: 100%;
+  padding: 0.875rem 1.5rem;
+  background: var(--accent);
+  color: var(--text-inverse);
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.caseStudyButton:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+.caseStudyIcon {
+  font-size: 1.1rem;
 }
 
 /* CTA Section */
@@ -564,8 +649,31 @@
     grid-template-columns: 1fr;
   }
 
-  .testimonialsGrid {
-    grid-template-columns: 1fr;
+  .carouselContainer {
+    height: 500px;
+  }
+
+  .carouselArrow {
+    font-size: 28px;
+    padding: 0.25rem;
+  }
+
+  .carouselArrowLeft {
+    left: 5px;
+  }
+
+  .carouselArrowRight {
+    right: 5px;
+  }
+
+  .testimonialCard {
+    width: 450px;
+    padding: 2rem;
+    min-height: 350px;
+  }
+
+  .testimonialSide {
+    display: none;
   }
 
   .step {
